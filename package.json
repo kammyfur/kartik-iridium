@@ -1,0 +1,16 @@
+{
+  "name": "iridium",
+  "version": "1.0.0",
+  "description": "A next-generation Kartik server, based on the original server",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js",
+    "run": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "nexe": "^4.0.0-beta.18"
+  }
+}
