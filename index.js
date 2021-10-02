@@ -98,7 +98,7 @@ server.on('connection', (socket) => {
         } catch (e) {
             console.error(e);
             if (e.name !== "KartikError") {
-                e.ktype = "E_SYSTEM_" + e.name.toUpperCase().replaceAll("ERROR", "");
+                e.ktype = "E_SYSTEM_" + e.name.toUpperCase().split("ERROR").join("");
             }
             socket.write(JSON.stringify({
                 _type: "error",
@@ -115,7 +115,7 @@ server.on('connection', (socket) => {
         while (!received.isFinished()) {
             const chunk = received.handleData()
             try {
-                raw = chunk.toString().replaceAll("}{", "}|{");
+                raw = chunk.toString().split("}{").join("}|{");
 
                 datas = raw.split("|").filter(i => i.trim() !== "");
                 datas.forEach((data) => {
@@ -204,7 +204,7 @@ server.on('connection', (socket) => {
                                 if (socket.linkedTo === null) {
                                     throw new KartikError("Client is not linked", "E_IRIDIUM_ROUTING");
                                 } else {
-                                    socket.linkedTo.write(JSON.stringify(info).replaceAll("<", "-").replaceAll(">", "-") + "\n");
+                                    socket.linkedTo.write(JSON.stringify(info).split("<").join("-").split(">").join("-") + "\n");
                                 }
                         }
                     }
@@ -212,14 +212,14 @@ server.on('connection', (socket) => {
             } catch (e) {
                 if (e.name !== "KartikError") {
                     console.error(e);
-                    e.ktype = "E_SYSTEM_" + e.name.toUpperCase().replaceAll("ERROR", "");
+                    e.ktype = "E_SYSTEM_" + e.name.toUpperCase().split("ERROR").join("");
                 } else {
                     console.error(e.ktype + ": " + e.message)
                 }
                 socket.write(JSON.stringify({
                     _type: "error",
-                    message: e.message.replaceAll("<", "-").replaceAll(">", "-"),
-                    type: e.ktype.replaceAll("<", "-").replaceAll(">", "-")
+                    message: e.message.split("<").join("-").split(">").join("-"),
+                    type: e.ktype.split("<").join("-").split(">").join("-")
                 }) + "\n")
                 socket.end();
             }
