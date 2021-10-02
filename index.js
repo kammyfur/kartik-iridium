@@ -54,9 +54,9 @@ class KartikError extends Error {
 const server = new Net.Server();
 
 server.on('connection', (socket) => {
-    socket.connectionId = "ird-" + (Math.random().toString().split(".")[1] + Math.random().toString().split(".")[1]).substr(0, 4);
+    socket.connectionId = "irid" + (Math.random().toString().split(".")[1] + Math.random().toString().split(".")[1]).substr(0, 4);
     while (Object.keys(clients).includes(socket.connectionId)) {
-        socket.connectionId = "ird-" + (Math.random().toString().split(".")[1] + Math.random().toString().split(".")[1]).substr(0, 4);
+        socket.connectionId = "irid" + (Math.random().toString().split(".")[1] + Math.random().toString().split(".")[1]).substr(0, 4);
     }
     socket.linkedTo = null;
     clients[socket.connectionId] = socket;
