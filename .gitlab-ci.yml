@@ -1,0 +1,12 @@
+image: node:current-buster
+
+before_script:
+  - apt-get update
+  - apt-get install -y git npm
+
+test:
+  script:
+    - npm install
+    - rm failed.log
+    - bash -c "rm failed.log; rm -f failed.log; find . -path ./node_modules -prune -o -name "*.js" \( -exec node -c {} \; -o -exec echo {} > failed.log \; \); echo $([ ! -s failed.log ]; echo $?); exit $([ ! -s failed.log ]; echo $?)"; echo $?
+    - bash -c "rm failed.log; rm -f failed.log; find . -path ./node_modules -prune -o -name "*.js" \( -exec node -c {} \; -o -exec echo {} > failed.log \; \); echo $([ ! -s failed.log ]; echo $?); exit $([ ! -s failed.log ]; echo $?)"; echo $?
